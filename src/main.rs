@@ -42,23 +42,23 @@ fn main() -> Result<()> {
         cm!(E7, G6), // 6
         cm!(C3, B1),
         cm!(G6, H8), // 7
-                     // cm!(D8, G5),
-                     // cm!(H8, F7),  // 8
-                     // cm!(C7, C5),
-                     // cm!(F7, G5),  // 9
-                     // cm!(A8, A4),
-                     // cm!(G5, H7),  // 10
-                     // cm!(B8, C6),
-                     // cm!(H7, F8),  // 11
-                     // cm!(C6, B4),
-                     // cm!(F8, D7),  // 12
-                     // cm!(B4, D5),
-                     // cm!(D7, C5),  // 13
-                     // cm!(D5, C3),
-                     // cm!(C5, A4),  // 14
-                     // cm!(E8, F8),
-                     // cm!(A4, C3),  // 15
-                     // cm!(F8, E8),
+        // cm!(D8, G5),
+        // cm!(H8, F7),  // 8
+        // cm!(C7, C5),
+        // cm!(F7, G5),  // 9
+        // cm!(A8, A4),
+        // cm!(G5, H7),  // 10
+        // cm!(B8, C6),
+        // cm!(H7, F8),  // 11
+        // cm!(C6, B4),
+        // cm!(F8, D7),  // 12
+        // cm!(B4, D5),
+        // cm!(D7, C5),  // 13
+        // cm!(D5, C3),
+        // cm!(C5, A4),  // 14
+        // cm!(E8, F8),
+        // cm!(A4, C3),  // 15
+        // cm!(F8, E8),
     ];
     opening.reserve(32 - opening.len());
 
@@ -169,7 +169,8 @@ fn white_to_move(
         ml.push(white_move);
 
         BOARD_COUNT.fetch_add(1, Ordering::Relaxed);
-        // faster to check number of black pieces remining than hash
+
+        // BitBoard check first; FEN prefix check is just to ensure knight & rook aren't swapped
         if *board.combined() == solution && board.to_string().starts_with(FINAL_FEN_PREFIX) {
             let _ = SOLUTION_COUNT.fetch_add(1, Ordering::Relaxed);
             // print_move_list(&ml);
@@ -232,9 +233,11 @@ fn black_to_move(
             ml.push(black_move);
 
             BOARD_COUNT.fetch_add(1, Ordering::Relaxed);
+
+            // BitBoard check first; FEN prefix check is just to ensure knight & rook aren't swapped
             if *board.combined() == solution && board.to_string().starts_with(FINAL_FEN_PREFIX) {
                 let _ = SOLUTION_COUNT.fetch_add(1, Ordering::Relaxed);
-                // print_move_list(&ml);
+
                 let path: [Square; 16] = ml
                     .chunks(2)
                     .map(|pair| pair[0].get_dest())
