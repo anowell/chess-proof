@@ -151,8 +151,11 @@ c3 b5 a7 c8 e7 g6 h8 f7 e5 d7 f8 h7 g5 e4 c3 b1
 c3 b5 a7 c8 e7 f5 h4 g6 f8 d7 b8 c6 e5 c4 a3 b1
 ```
 
+I made no attempt to find solutions that didn't start with `1. Nc3 b5  2. Nxb5 Nf6  3. Nxa7 Ne4  4. Nxc8` though it's clear that there are many transpositions. For example, `1. Nc3 b5  2. Nxb5` transposes into `1. Na3 b5  2. Nxb5` which immediately doubles the number of solutions and knight paths that I found.
+
 ### Other possible explorations:
 
 - I chose the `b1` knight because a lot of my early `g1` knight attempts caused a check that made it harder to solve. Are there more solutions with the `b1` knight or the `g1` knight moving?
 - Are there any solutions where both white knights move? This would require both black knights landing on `b1` and `g1` to ensure every move is still a capture.
 - Are there large clasess of legal black moves we can rule out as viable for getting to either a solution, or to unique knight paths?
+- Can we efficiently identify transpositions to avoid recalculating lines?
