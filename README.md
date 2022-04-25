@@ -1,5 +1,6 @@
 This was a musing that started as a response to a chess puzzle. What is the least number of moves required to result in this position:
 
+[![Chess Puzzle](chess-puzzle.png)](https://www.youtube.com/post/Ugkx8bSSebtZEBAcEBt17CYl0Qx-RfGb8xUC)
 
 As key insights:
 - White can only move knights
